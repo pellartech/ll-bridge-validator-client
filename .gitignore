@@ -1,0 +1,18 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+.idea
+.vscode
+
+#Hardhat files
+cache
+artifacts
+
+gateway.ldb
+conn.ldb
+dist
+app_data
+mongo_data
