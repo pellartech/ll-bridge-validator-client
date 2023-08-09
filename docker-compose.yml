@@ -15,7 +15,7 @@ services:
   ll-bridge-validator:
     container_name: ll-bridge-validator
     restart: unless-stopped
-    image: slymewl/ll-validator:v1.0.0
+    image: slymewl/ll-validator:latest
     ports:
       - '2710:8080'
     environment:
