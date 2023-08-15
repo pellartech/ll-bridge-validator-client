@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# echo to env file
-echo "SYSTEM_SECRET_KEY=$SYSTEM_SECRET_KEY" >> .env
-echo "CHAINS_ETHEREUM_RPC_URL=$CHAINS_ETHEREUM_RPC_URL" >> .env
-echo "CHAINS_LIGHTLINK_RPC_URL=$CHAINS_LIGHTLINK_RPC_URL" >> .env
-
 # Update the package index
 sudo apt update
 
