@@ -26,7 +26,7 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # read env
-sudo docker compose up -d
+sudo docker-compose pull  && docker compose up -d
 
 url="http://localhost:2710"
 response=$(curl -s "$url/api/v1/sites/hello")
