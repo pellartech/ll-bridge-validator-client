@@ -18,13 +18,12 @@ services:
     image: slymewl/ll-validator:latest
     ports:
       - '2710:8080'
+    env_file:
+      - .env
     environment:
       - MONGODB_URL=mongodb://ll_validator_mongo:27017/ll_bridge_validator
       - REDIS_HOST=ll_validator_redis
       - REDIS_PORT=6379
-      - SYSTEM_SECRET_KEY=${SYSTEM_SECRET_KEY}
-      - CHAINS_ETHEREUM_RPC_URL=${CHAINS_ETHEREUM_RPC_URL}
-      - CHAINS_LIGHTLINK_RPC_URL=${CHAINS_LIGHTLINK_RPC_URL}
     links:
       - ll_validator_mongo
       - ll_validator_redis

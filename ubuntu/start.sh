@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# echo to env file
+echo "SYSTEM_SECRET_KEY=$SYSTEM_SECRET_KEY" >> .env
+echo "CHAINS_ETHEREUM_RPC_URL=$CHAINS_ETHEREUM_RPC_URL" >> .env
+echo "CHAINS_LIGHTLINK_RPC_URL=$CHAINS_LIGHTLINK_RPC_URL" >> .env
+
 # Update the package index
 sudo apt update
 
@@ -25,4 +30,31 @@ sudo usermod -aG docker $USER
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+# read env
 sudo docker compose up -d
+
+url="http://localhost:2710"
+response=$(curl -s "$url/api/v1/sites/hello")
+
+for i in {1..10}; do
+    if [ ! -z "$response" ]; then
+        break
+    fi
+
+    echo "Waiting for the application to start..."
+    sleep 10
+    response=$(curl -s "$url/api/v1/sites/hello")
+done
+
+if [ -z "$response" ]; then
+    echo "The application failed to start."
+    exit 1
+fi
+
+echo "The application started successfully."
+
+lightlinkValidator=$(curl -s "$url/api/v1/accounts/lightlink/standard/validator")
+echo "LightLink validator: $lightlinkValidator"
+
+ethereumValidator=$(curl -s "$url/api/v1/accounts/ethereum/standard/validator")
+echo "Ethereum validator: $ethereumValidator"
