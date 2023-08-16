@@ -15,7 +15,7 @@ services:
   ll-bridge-validator:
     container_name: ll-bridge-validator
     restart: unless-stopped
-    image: lightlink/bridge-validator-testnet:latest
+    image: lightlink/bridge-validator-mainnet:latest
     ports:
       - '2710:8080'
     env_file:
