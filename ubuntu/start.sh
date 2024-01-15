@@ -65,6 +65,7 @@ if [ -z "$lightlinkValidatorResp" ]; then
 fi
 
 echo "The LightLink validator was created successfully."
+echo "The LightLink validator address is: $lightlinkValidatorResp"
 
 ethereumValidatorResp=$(curl -s "$url/api/v1/accounts/ethereum/standard/validator")
 for i in {1..10}; do
@@ -83,6 +84,7 @@ if [ -z "$ethereumValidatorResp" ]; then
 fi
 
 echo "The Ethereum validator was created successfully."
+echo "The Ethereum validator address is: $ethereumValidatorResp"
 
 bscValidatorResp=$(curl -s "$url/api/v1/accounts/bsc/standard/validator")
 for i in {1..10}; do
@@ -101,3 +103,4 @@ if [ -z "$bscValidatorResp" ]; then
 fi
 
 echo "The Bsc validator was created successfully."
+echo "The Bsc validator address is: $bscValidatorResp"
