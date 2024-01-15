@@ -48,8 +48,56 @@ fi
 
 echo "The application started successfully."
 
-lightlinkValidator=$(curl -s "$url/api/v1/accounts/lightlink/standard/validator")
-echo "LightLink validator: $lightlinkValidator"
+lightlinkValidatorResp=$(curl -s "$url/api/v1/accounts/lightlink/standard/validator")
+for i in {1..10}; do
+    if [ ! -z "$lightlinkValidatorResp" ]; then
+        break
+    fi
 
-ethereumValidator=$(curl -s "$url/api/v1/accounts/ethereum/standard/validator")
-echo "Ethereum validator: $ethereumValidator"
+    echo "Waiting for the LightLink validator to be created..."
+    sleep 10
+    lightlinkValidatorResp=$(curl -s "$url/api/v1/accounts/lightlink/standard/validator")
+done
+
+if [ -z "$lightlinkValidatorResp" ]; then
+    echo "The LightLink validator failed to be created."
+    exit 1
+fi
+
+echo "The LightLink validator was created successfully."
+
+ethereumValidatorResp=$(curl -s "$url/api/v1/accounts/ethereum/standard/validator")
+for i in {1..10}; do
+    if [ ! -z "$ethereumValidatorResp" ]; then
+        break
+    fi
+
+    echo "Waiting for the Ethereum validator to be created..."
+    sleep 10
+    ethereumValidatorResp=$(curl -s "$url/api/v1/accounts/ethereum/standard/validator")
+done
+
+if [ -z "$ethereumValidatorResp" ]; then
+    echo "The Ethereum validator failed to be created."
+    exit 1
+fi
+
+echo "The Ethereum validator was created successfully."
+
+bscValidatorResp=$(curl -s "$url/api/v1/accounts/bsc/standard/validator")
+for i in {1..10}; do
+    if [ ! -z "$bscValidatorResp" ]; then
+        break
+    fi
+
+    echo "Waiting for the Bsc validator to be created..."
+    sleep 10
+    bscValidatorResp=$(curl -s "$url/api/v1/accounts/bsc/standard/validator")
+done
+
+if [ -z "$bscValidatorResp" ]; then
+    echo "The Bsc validator failed to be created."
+    exit 1
+fi
+
+echo "The Bsc validator was created successfully."
