@@ -2,7 +2,7 @@ version: '3'
 services:
   ll_validator_mongo:
     container_name: ll_validator_mongo
-    image: mongo:sha:e325fe350a8c
+    image: mongo:sha256:ee3b4d1239f12b094c4936dd08a2fbc227300beaf784c46c509e2f1ac5e6d879
     volumes:
       - ./mongo_data:/data/db
     ports:
