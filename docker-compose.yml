@@ -2,16 +2,18 @@ version: '3'
 services:
   ll_validator_mongo:
     container_name: ll_validator_mongo
-    image: mongo
+    image: mongo:5.0
     volumes:
       - ./mongo_data:/data/db
     ports:
       - '27101:27017'
+    restart: unless-stopped
   ll_validator_redis:
     container_name: ll_validator_redis
     image: redis
     ports:
       - '6300:6379'
+    restart: unless-stopped
   ll-bridge-validator:
     container_name: ll-bridge-validator
     restart: unless-stopped
